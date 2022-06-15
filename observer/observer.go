@@ -2,15 +2,20 @@ package observer
 
 import "fmt"
 
-
-type IObserver interface {
-    Update()
+type Observer interface {
+	Update()
 }
 
-type Observer struct {
-    Observable IObservable
+type observer struct {
+	Observable Observable
 }
 
-func (o *Observer) Update() {
-    fmt.Println("UPDATED")
+func NewObserver(observable Observable) Observer {
+	return &observer{
+		Observable: observable,
+	}
+}
+
+func (o *observer) Update() {
+	fmt.Println("UPDATED")
 }

@@ -1,21 +1,24 @@
 package observer
 
-
-type IObservable interface {
-    Add(observer IObserver)
-    Notify()
+type Observable interface {
+	Add(observer Observer)
+	Notify()
 }
 
-type Observable struct {
-    observers []IObserver
+type observable struct {
+	observers []Observer
 }
 
-func (o *Observable) Add(observer IObserver) {
-    o.observers = append(o.observers, observer)
+func NewObservable() Observable {
+	return &observable{}
 }
 
-func (o *Observable) Notify() {
-    for _, obv := range o.observers {
-        obv.Update()
-    }
+func (o *observable) Add(observer Observer) {
+	o.observers = append(o.observers, observer)
+}
+
+func (o *observable) Notify() {
+	for _, obv := range o.observers {
+		obv.Update()
+	}
 }

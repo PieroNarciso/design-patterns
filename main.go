@@ -2,19 +2,14 @@ package main
 
 import "github.com/PieroNarciso/design-patterns/observer"
 
-
 func main() {
-    observable := observer.Observable{}
+	observable := observer.NewObservable()
 
-    observer1 := observer.Observer{
-        Observable: &observable,
-    }
-    observer2 := observer.Observer{
-        Observable: &observable,
-    }
+	observer1 := observer.NewObserver(observable)
+	observer2 := observer.NewObserver(observable)
 
-    observable.Add(&observer1)
-    observable.Add(&observer2)
+	observable.Add(observer1)
+	observable.Add(observer2)
 
-    observable.Notify()
+	observable.Notify()
 }
